@@ -3,27 +3,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Contador Bloc App',
-      home: BlocProvider(
-        create: (_) => CounterBloc(),
-        child: CounterPage(),
+    return BlocProvider(
+      create: (_) => CounterBloc(),
+      child: const MaterialApp(
+        title: 'Contador Bloc App',
+        home: CounterPage(),
       ),
     );
   }
 }
 
 class CounterPage extends StatelessWidget {
+  const CounterPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Contador Bloc')),
+      appBar: AppBar(title: const Text('Contador Bloc')),
       body: Center(
         child: BlocBuilder<CounterBloc, CounterState>(
           builder: (context, state) {
