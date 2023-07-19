@@ -1,32 +1,46 @@
-import 'package:alter_course/bloc/message_bloc.dart';
-import 'package:alter_course/ui/Views/Login/login_view.dart';
+import 'package:alter_course/bloc/counter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() => runApp(const AppState());
-
-class AppState extends StatelessWidget {
-  const AppState({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiBlocProvider(providers: [
-      BlocProvider(
-        create: (context) => MessageBloc(),
-      )
-    ], child: const MyApp());
-  }
+void main() {
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Material App',
-      home: LoginView(),
-      debugShowCheckedModeBanner: false,
+      title: 'Contador Bloc App',
+      home: BlocProvider(
+        create: (_) => CounterBloc(),
+        child: CounterPage(),
+      ),
+    );
+  }
+}
+
+class CounterPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Contador Bloc')),
+      body: Center(
+        child: BlocBuilder<CounterBloc, CounterState>(
+          builder: (context, state) {
+            return Text(
+              'Contador: ${state.count}',
+              style: TextStyle(fontSize: 24),
+            );
+          },
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Emitir el evento para incrementar el contador
+          context.read<CounterBloc>().add(IncrementEvent());
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 }
