@@ -1,11 +1,23 @@
-import 'package:alter_course/infraestructure/presentation/user_repository_impl.dart';
+import 'package:alter_course/application/bloc/login/login_bloc.dart';
+import 'package:alter_course/infraestructure/presentation/screens/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'application/bloc/counter_bloc.dart';
-
 void main() {
-  runApp(const MyApp());
+  runApp(const AppState());
+}
+
+class AppState extends StatelessWidget {
+  const AppState({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(providers: [
+      BlocProvider(
+        create: (context) => LoginBloc(),
+      )
+    ], child: const MyApp());
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -13,56 +25,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => CounterBloc(UserRepositoryImpl()),
-      child: const MaterialApp(
-        title: 'Contador Bloc App',
-        home: CounterPage(),
-      ),
-    );
-  }
-}
-
-class CounterPage extends StatelessWidget {
-  const CounterPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Contador Bloc')),
-      body: Center(
-        child: BlocListener<CounterBloc, CounterState>(
-          listener: (context, state) {},
-          child: Column(
-            children: [
-              ElevatedButton(
-                  onPressed: () {
-                    context.read<CounterBloc>().add(ClearEvent());
-                  },
-                  child: const Text("BORRAR")),
-              BlocBuilder<CounterBloc, CounterState>(
-                builder: (context, state) {
-                  switch (state) {
-                    case LoadingCounter():
-                      return const CircularProgressIndicator();
-                    case CorrectoCounter():
-                      return Text(state.user.name);
-                    default:
-                      return const Text("Error");
-                  }
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Emitir el evento para incrementar el contador
-          context.read<CounterBloc>().add(IncrementEvent());
-        },
-        child: Icon(Icons.add),
-      ),
+    return MaterialApp.router(
+      routerConfig: goRouter,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
