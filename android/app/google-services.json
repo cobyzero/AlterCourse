@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "93462325667",
+    "project_id": "altercourse-e177f",
+    "storage_bucket": "altercourse-e177f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93462325667:android:64447c28df66e5d76c5216",
+        "android_client_info": {
+          "package_name": "com.cobyzero.altercourse.alter_course"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "93462325667-elabefajcbqr58445ouaetctgb6suouc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCp2VYiKdTPNTSNHq56I8MWac1trSpS1eU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "93462325667-elabefajcbqr58445ouaetctgb6suouc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
