@@ -1,6 +1,8 @@
-import 'package:alter_course/bloc/counter_bloc.dart';
+import 'package:alter_course/infraestructure/presentation/user_repository_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'application/bloc/counter_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => CounterBloc(),
+      create: (_) => CounterBloc(UserRepositoryImpl()),
       child: const MaterialApp(
         title: 'Contador Bloc App',
         home: CounterPage(),
@@ -30,25 +32,21 @@ class CounterPage extends StatelessWidget {
       appBar: AppBar(title: const Text('Contador Bloc')),
       body: Center(
         child: BlocListener<CounterBloc, CounterState>(
-          listener: (context, state) {
-            if (state is CorrectoCounter) {
-              print("CARGO");
-            }
-          },
+          listener: (context, state) {},
           child: Column(
             children: [
               ElevatedButton(
                   onPressed: () {
                     context.read<CounterBloc>().add(ClearEvent());
                   },
-                  child: Text("BORRAR")),
+                  child: const Text("BORRAR")),
               BlocBuilder<CounterBloc, CounterState>(
                 builder: (context, state) {
                   switch (state) {
                     case LoadingCounter():
                       return const CircularProgressIndicator();
                     case CorrectoCounter():
-                      return Text(state.count);
+                      return Text(state.user.name);
                     default:
                       return const Text("Error");
                   }
