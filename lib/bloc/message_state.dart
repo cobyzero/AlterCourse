@@ -11,3 +11,7 @@ abstract class MessageState extends Equatable {
 class MessageInitial extends MessageState {
   const MessageInitial(super.message);
 }
+
+class MessageEnterState extends MessageState {
+  MessageEnterState(super.message);
+}

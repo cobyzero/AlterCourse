@@ -7,7 +7,7 @@ part 'message_state.dart';
 class MessageBloc extends Bloc<MessageEvent, MessageState> {
   MessageBloc() : super(MessageInitial("")) {
     on<MessageEvent>((event, emit) {
-      emit(MessageInitial("hola"));
+      emit(MessageEnterState(event.props[0] as String));
     });
   }
 }

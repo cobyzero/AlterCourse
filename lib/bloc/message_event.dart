@@ -8,5 +8,9 @@ abstract class MessageEvent extends Equatable {
 }
 
 class AddMessageEvent extends MessageEvent {
-  const AddMessageEvent();
+  final String message;
+  const AddMessageEvent(this.message);
+
+  @override
+  List<Object> get props => [message];
 }

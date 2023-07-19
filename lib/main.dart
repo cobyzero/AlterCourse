@@ -1,4 +1,5 @@
 import 'package:alter_course/bloc/message_bloc.dart';
+import 'package:alter_course/ui/Views/Login/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,7 +14,7 @@ class AppState extends StatelessWidget {
       BlocProvider(
         create: (context) => MessageBloc(),
       )
-    ], child: MyApp());
+    ], child: const MyApp());
   }
 }
 
@@ -24,24 +25,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Material App Bar'),
-          ),
-          body: Column(
-            children: [
-              ElevatedButton(
-                  onPressed: () {
-                    context.read<MessageBloc>().add(AddMessageEvent());
-                  },
-                  child: const Text("Enter")),
-              BlocBuilder<MessageBloc, MessageState>(
-                builder: (context, state) {
-                  return state.message.isEmpty ? const Text("No hay datos") : Text(state.message);
-                },
-              ),
-            ],
-          )),
+      home: LoginView(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
