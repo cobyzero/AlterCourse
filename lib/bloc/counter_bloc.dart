@@ -4,9 +4,13 @@ part 'counter_event.dart';
 part 'counter_state.dart';
 
 class CounterBloc extends Bloc<CounterEvent, CounterState> {
-  CounterBloc() : super(const CounterState()) {
+  CounterBloc() : super(LoadingCounter()) {
     on<IncrementEvent>((event, emit) {
-      emit(state.copyWith(count: state.count + 1));
+      emit(CorrectoCounter("TODO LISTO"));
+    });
+
+    on<ClearEvent>((event, emit) {
+      emit(CorrectoCounter("vacio"));
     });
   }
 }

@@ -29,13 +29,33 @@ class CounterPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Contador Bloc')),
       body: Center(
-        child: BlocBuilder<CounterBloc, CounterState>(
-          builder: (context, state) {
-            return Text(
-              'Contador: ${state.count}',
-              style: TextStyle(fontSize: 24),
-            );
+        child: BlocListener<CounterBloc, CounterState>(
+          listener: (context, state) {
+            if (state is CorrectoCounter) {
+              print("CARGO");
+            }
           },
+          child: Column(
+            children: [
+              ElevatedButton(
+                  onPressed: () {
+                    context.read<CounterBloc>().add(ClearEvent());
+                  },
+                  child: Text("BORRAR")),
+              BlocBuilder<CounterBloc, CounterState>(
+                builder: (context, state) {
+                  switch (state) {
+                    case LoadingCounter():
+                      return const CircularProgressIndicator();
+                    case CorrectoCounter():
+                      return Text(state.count);
+                    default:
+                      return const Text("Error");
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
