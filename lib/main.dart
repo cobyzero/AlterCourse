@@ -1,5 +1,6 @@
 import 'package:alter_course/application/bloc/login/login_bloc.dart';
-import 'package:alter_course/infraestructure/presentation/screens/router.dart';
+import 'package:alter_course/config/router/router.dart';
+import 'package:alter_course/config/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: goRouter,
+      theme: themeData,
       debugShowCheckedModeBanner: false,
     );
   }
